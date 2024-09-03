@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Time Stories</title>
+</head>
+<body>
+    <h1>Latest Time Stories</h1>
+    <pre id="json-output"></pre> 
+
+    <script>
+        async function fetchStories() {
+            try {
+                const response = await fetch('http://localhost:3000/getTimeStories');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const stories = await response.json();
+                
+             
+                console.log(stories);
+
+              
+                const jsonOutput = document.getElementById('json-output');
+                jsonOutput.textContent = JSON.stringify(stories, null, 2);
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        }
+
+        fetchStories();
+    </script>
+</body>
+</html>
